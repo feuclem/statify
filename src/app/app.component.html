@@ -1,17 +1,1 @@
-<div class="content" role="main">
-  <div (click)="onTagClick(0)">Top tracks</div>
-  <div (click)="onTagClick(1)">Currently played</div>
-
-  <div *ngIf="tag == 0">
-    <div *ngFor="let track of trackList">
-      {{ track.artist }} - {{ track.album }} - {{ track.name }} <img src="{{track.albumImg}}" alt="">
-    </div>
-  </div>
-  <div *ngIf="tag == 1">
-    <div *ngFor="let currencyTrackPlayed of currencyTrackPlayed">
-      {{ currencyTrackPlayed.playedAt }} - {{ currencyTrackPlayed.track.album }} - {{ currencyTrackPlayed.track.name }} <img src="{{currencyTrackPlayed.track.albumImg}}" alt="">
-    </div>
-  </div>
-</div>
-
-
+<router-outlet></router-outlet>
