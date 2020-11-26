@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {StatsService} from "./stats.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: "app-stats",
@@ -12,7 +13,10 @@ export class StatsComponent implements OnInit {
   trackList: Track[] = [];
   currencyTrackPlayed: TrackCurrentlyPlayed[] = [];
 
-  constructor(private statsService: StatsService) {
+  constructor(
+    private statsService: StatsService,
+    private datePipe: DatePipe
+  ) {
   }
 
   ngOnInit(): void {
@@ -33,7 +37,7 @@ export class StatsComponent implements OnInit {
       value.items.map(item =>
         this.currencyTrackPlayed.push(
           new TrackCurrentlyPlayed(
-            item.played_at,
+            this.datePipe.transform(item.played_at, "dd/MM/yyyy"),
             new Track(
               item.track.artists[0].name,
               item.track.album.name,

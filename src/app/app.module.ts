@@ -9,6 +9,7 @@ import {StatsComponent} from "./stats/stats.component";
 import {HomeComponent} from "./home/home.component";
 import {ConfigService} from "./config/config.service";
 import {StatsService} from "./stats/stats.service";
+import {DatePipe} from "@angular/common";
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [
     ConfigService,
-    StatsService
+    StatsService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

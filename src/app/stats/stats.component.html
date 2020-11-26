@@ -1,15 +1,54 @@
-<div class="content" role="main">
-  <div (click)="onTagClick(0)">Top tracks</div>
-  <div (click)="onTagClick(1)">Currently played</div>
+<div class="container">
+  <div class="tabs">
+    <ul>
+      <li (click)="onTagClick(0)"><a>Top tracks</a></li>
+      <li (click)="onTagClick(1)"><a>List currently played songs</a></li>
+    </ul>
+  </div>
 
-  <div *ngIf="tag == 0">
-    <div *ngFor="let track of trackList">
-      {{ track.artist }} - {{ track.album }} - {{ track.name }} <img src="{{track.albumImg}}" alt="">
+  <div class="columns is-multiline" *ngIf="tag == 0">
+    <div class="card column is-one-quarter mb-2" *ngFor="let track of trackList">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-64x64">
+              <img src="{{track.albumImg}}" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">{{ track.name }}</p>
+            <p class="subtitle is-6">{{ track.artist }}</p>
+          </div>
+        </div>
+
+        <div class="content">
+          Album : {{ track.album }}
+        </div>
+      </div>
     </div>
   </div>
-  <div *ngIf="tag == 1">
-    <div *ngFor="let currencyTrackPlayed of currencyTrackPlayed">
-      {{ currencyTrackPlayed.playedAt }} - {{ currencyTrackPlayed.track.album }} - {{ currencyTrackPlayed.track.name }} <img src="{{currencyTrackPlayed.track.albumImg}}" alt="">
+
+  <div class="columns is-multiline" *ngIf="tag == 1">
+    <div class="card column is-one-quarter mb-2" *ngFor="let currencyTrackPlayed of currencyTrackPlayed">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-64x64">
+              <img src="{{currencyTrackPlayed.track.albumImg}}" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">{{ currencyTrackPlayed.track.name }}</p>
+            <p class="subtitle is-6">{{ currencyTrackPlayed.track.artist }}</p>
+          </div>
+        </div>
+
+        <div class="content">
+          Album : {{ currencyTrackPlayed.track.album }} <br />
+          Joué a : {{ currencyTrackPlayed.playedAt }}
+        </div>
+      </div>
     </div>
   </div>
+
 </div>
