@@ -1,18 +1,12 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
 })
 export class ConfigService {
 
-  private code = "";
-  private token = "";
-
-  constructor(
-    private httpClient: HttpClient
-  ) {
+  constructor(private httpClient: HttpClient) {
   }
 
   getAccessCode(): void {
@@ -31,19 +25,23 @@ export class ConfigService {
       "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Basic ${btoa("d3a2f53385a247af80a4d2cb30304a25:4cd467eac8f44c80b22193adad7b2f19")}`
     });
-    const body = `grant_type=authorization_code&code=${this.code}&redirect_uri=http://localhost:4200/callback`;
+    const body = `grant_type=authorization_code&code=${this.getCode()}&redirect_uri=http://localhost:4200/callback`;
     return this.httpClient.post("https://accounts.spotify.com/api/token", body, {headers}).toPromise();
   }
 
+  getCode(): string {
+    return localStorage.getItem("code");
+  }
+
   setCode(value: string): void {
-    this.code = value;
+    localStorage.setItem("code", value);
   }
 
   getToken(): string {
-    return this.token;
+    return localStorage.getItem("token");
   }
 
   setToken(value: string): void {
-    this.token = value;
+    localStorage.setItem("token", value);
   }
 }
