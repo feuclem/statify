@@ -16,7 +16,7 @@ export class StatsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.statsService.getTopTracks().subscribe(value => {
+    this.statsService.getTopTracks().then(value => {
       value.items.map(item =>
         this.trackList.push(
           new Track(
@@ -29,7 +29,7 @@ export class StatsComponent implements OnInit {
       );
     });
 
-    this.statsService.getRecentlyPlayedSongs().subscribe(value => {
+    this.statsService.getRecentlyPlayedSongs().then(value => {
       value.items.map(item =>
         this.currencyTrackPlayed.push(
           new TrackCurrentlyPlayed(

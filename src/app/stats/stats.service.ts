@@ -13,21 +13,21 @@ export class StatsService {
     private configService: ConfigService,
   ) {}
 
-  getTopTracks(): Observable<any> {
+  getTopTracks(): Promise<any> {
     const headers = new HttpHeaders({
       Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.configService.getToken()}`
     });
-    return this.http.get("https://api.spotify.com/v1/me/top/tracks", {headers});
+    return this.http.get("https://api.spotify.com/v1/me/top/tracks", {headers}).toPromise();
   }
 
-  getRecentlyPlayedSongs(): Observable<any> {
+  getRecentlyPlayedSongs(): Promise<any> {
     const headers = new HttpHeaders({
       Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.configService.getToken()}`
     });
-    return this.http.get("\thttps://api.spotify.com/v1/me/player/recently-played", {headers});
+    return this.http.get("\thttps://api.spotify.com/v1/me/player/recently-played", {headers}).toPromise();
   }
 }

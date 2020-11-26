@@ -19,7 +19,7 @@ export class CallbackComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(param => {
       this.configService.setCode(param.code);
-      this.configService.getOrRefreshToken().subscribe(value => {
+      this.configService.getOrRefreshToken().then(value => {
         this.configService.setToken(value["access_token"]);
         this.router.navigate(["/stats"]);
       });
